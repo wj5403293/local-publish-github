@@ -1,0 +1,6 @@
+{
+  "repo": "owner/name",
+  "display_name": "你的项目名",
+  "assets": ["build/pkg-v{version}.zip"],
+  "notes_file": "CHANGELOG.md"
+}

@@ -1,0 +1,5 @@
+node_modules/
+.publish.json
+*.zip
+*.log
+.DS_Store

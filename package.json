@@ -1,0 +1,83 @@
+{
+  "name": "local-publish-github",
+  "version": "0.11.4",
+  "private": true,
+  "type": "module",
+  "main": "lib/index.js",
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "engines": {
+    "dsh": ">=0.2.1-rc.2 <0.3.0-0"
+  },
+  "dshGo": {
+    "v": 1,
+    "title": {
+      "zh": "GitHub 发布",
+      "en": "GitHub publish"
+    },
+    "icon": "share",
+    "wants": [
+      "clipboard"
+    ],
+    "contributes": {
+      "composer.actions": [
+        {
+          "id": "publish-github",
+          "label": {
+            "zh": "发布 GitHub",
+            "en": "Publish"
+          },
+          "icon": "share"
+        },
+        {
+          "id": "save-token",
+          "label": {
+            "zh": "存令牌",
+            "en": "Save token"
+          },
+          "icon": "save"
+        }
+      ],
+      "panels": [
+        {
+          "id": "token-manager",
+          "title": {
+            "zh": "GitHub 令牌",
+            "en": "GitHub token"
+          },
+          "icon": "wallet",
+          "placement": [
+            "features",
+            "chat.panel"
+          ]
+        },
+        {
+          "id": "publish-guide",
+          "title": {
+            "zh": "发布步骤",
+            "en": "Publish steps"
+          },
+          "icon": "text",
+          "placement": [
+            "chat.panel",
+            "features",
+            "plugin"
+          ]
+        }
+      ]
+    }
+  },
+  "license": "MIT",
+  "description": "dsh-go 原生插件：把任意项目一键发布到 GitHub（建仓/推送/tag/Release/附件/SHA256 校验，通用版）",
+  "keywords": [
+    "dsh-go",
+    "dsh-plugin",
+    "github",
+    "release",
+    "publish",
+    "dshgo"
+  ]
+}
