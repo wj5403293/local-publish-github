@@ -1,6 +1,6 @@
 # local-publish-github · GitHub 发布
 
-> 构建于 **dsh-go** 原生插件框架 · 版本 **v0.11.5** · MIT
+> 构建于 **dsh-go** 原生插件框架 · 版本 **v0.11.6** · MIT
 
 <p align="center">🌐 <a href="README.md">English</a> · <strong>中文</strong></p>
 
@@ -33,7 +33,7 @@
 
 | 版本 | 组件 | 依赖 | 许可 |
 |---:|---|---|---|
-| v0.11.5 | 2 胶囊 + 2 面板 | GitHub REST API、curl、git | MIT |
+| v0.11.6 | 2 胶囊 + 2 面板 | GitHub REST API、curl、git | MIT |
 
 <a id="features"></a>
 
@@ -55,7 +55,7 @@
 dsh plugin --profile web add /path/to/local-publish-github
 
 # 或解压 zip 后指向目录
-unzip local-publish-github-0.11.5.zip -d local-publish-github
+unzip local-publish-github-0.11.6.zip -d local-publish-github
 dsh plugin --profile web add ./local-publish-github
 ```
 
@@ -174,9 +174,9 @@ local-publish-github/
 下载发布包后先校验，再解压：
 
 ```bash
-sha256sum -c local-publish-github-0.11.5.zip.sha256
+sha256sum -c local-publish-github-0.11.6.zip.sha256
 # 或
-sha256sum local-publish-github-0.11.5.zip
+sha256sum local-publish-github-0.11.6.zip
 ```
 
 校验失败 = 下载不完整或被篡改，请重新下载。

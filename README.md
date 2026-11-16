@@ -1,6 +1,6 @@
 # local-publish-github · One-command GitHub releases
 
-> Built on the **dsh-go** native plugin framework · version **v0.11.5** · MIT
+> Built on the **dsh-go** native plugin framework · version **v0.11.6** · MIT
 
 <p align="center">🌐 <strong>English</strong> · <a href="README_zh.md">中文</a></p>
 
@@ -33,7 +33,7 @@ confirm version + release notes
 
 | Version | Components | Dependencies | License |
 |---:|---|---|---|
-| v0.11.5 | 2 capsules + 2 panels | GitHub REST API, curl, git | MIT |
+| v0.11.6 | 2 capsules + 2 panels | GitHub REST API, curl, git | MIT |
 
 <a id="features"></a>
 
@@ -54,7 +54,7 @@ confirm version + release notes
 dsh plugin --profile web add /path/to/local-publish-github
 
 # or unzip first
-unzip local-publish-github-0.11.5.zip -d local-publish-github
+unzip local-publish-github-0.11.6.zip -d local-publish-github
 dsh plugin --profile web add ./local-publish-github
 ```
 
@@ -171,7 +171,7 @@ local-publish-github/
 ## Verify downloads
 
 ```bash
-sha256sum -c local-publish-github-0.11.5.zip.sha256
+sha256sum -c local-publish-github-0.11.6.zip.sha256
 ```
 
 <a id="contributing"></a>

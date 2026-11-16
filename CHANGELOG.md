@@ -2,6 +2,20 @@
 
 > 「本版更新」的唯一来源：发布脚本默认读取最新一段作为 Release 正文。
 
+## [0.11.6] - 2026-11-17
+
+**English documentation / 英文文档**
+
+- Added `README.md` (English) — GitHub renders it as the default README, followed by `README_zh.md` (Chinese) with a language switch.
+- English release notes in this section so international users can read what changed.
+- No functional changes in this release; installer and guards are the same as v0.11.5.
+
+**中文**
+
+- 新增英文版 `README.md`（GitHub 默认展示），中文移到 `README_zh.md`，两版顶部有语言切换。
+- 本版更新同时提供英文说明，方便国外用户阅读。
+- 本版**无功能变更**，安装方式与安全护栏同 v0.11.5。
+
 ## [0.11.5] - 2026-11-17
 
 **首版：通用发布插件**
