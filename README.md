@@ -221,7 +221,7 @@ sha256sum local-publish-github-0.11.5.zip
 
 - 邮箱：<xiaotianya14@gmail.com>
 - QQ 群：**258605008**
-- 问题反馈：仓库创建后启用 Issues（暂空）
+- 问题反馈：[GitHub Issues](https://github.com/xiaotianya14/local-publish-github/issues)
 
 <p align="right">(<a href="#about">返回顶部</a>)</p>
 
