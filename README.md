@@ -81,7 +81,7 @@ After install it appears in **Settings → Plugins** as "GitHub 发布". Restart
 5. **Publish**:
 
 ```bash
-bash bin/publish.sh --dir <project> --version 0.1.0 --confirmed
+bash bin/publish.sh --dir <project> --version 0.1.0 --notes-reviewed --confirmed
 ```
 
 <a id="usage"></a>
@@ -118,6 +118,9 @@ bash bin/publish.sh --dir ./myproj --version 0.2.0 --resume --confirmed
 | `--tag-prefix` | Tag prefix, default `v` |
 | `--create-repo` / `--public` | Create repo if missing (private by default) |
 | `--dry-run` | Preflight only |
+> **Release-notes gate**: a real publish (not `--dry-run`) requires `--notes-reviewed`,
+> meaning the notes text was shown to the user and approved. The script refuses to publish otherwise.
+
 | `--confirmed` | User approved; actually publish |
 | `--draft` / `--prerelease` | Draft / prerelease |
 | `--generate-notes` | Append GitHub auto-generated English notes |

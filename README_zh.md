@@ -82,7 +82,7 @@ dsh plugin --profile web add ./local-publish-github
 5. **发布**：
 
 ```bash
-bash bin/publish.sh --dir <项目目录> --version 0.1.0 --confirmed
+bash bin/publish.sh --dir <项目目录> --version 0.1.0 --notes-reviewed --confirmed
 ```
 
 <a id="usage"></a>
@@ -119,7 +119,11 @@ bash bin/publish.sh --dir ./myproj --version 0.2.0 --resume --confirmed
 | `--tag-prefix` | tag 前缀，默认 `v` |
 | `--create-repo` / `--public` | 仓库不存在时创建（默认私有） |
 | `--dry-run` | 只预检 |
-| `--confirmed` | 用户已确认，允许真正发布 |
+| `--notes-reviewed` | **必填（发布时）**：发布公告已给用户审核原文 |
+> **发布公告硬门**：真正发布（非 `--dry-run`）必须同时带 `--notes-reviewed`。
+> 意思是「这份公告原文已经给用户看过并同意」——脚本会拒绝没有该参数的发布，防止未经审核直接发。
+
+| `--confirmed` | 用户已确认版本号与内容，允许真正发布 |
 | `--draft` / `--prerelease` | 草稿 / 预发布 |
 | `--generate-notes` | 附加 GitHub 自动生成的英文变更汇总 |
 | `--resume` / `--overwrite-files` | 续传 / 删除本 Release 旧附件后重传 |

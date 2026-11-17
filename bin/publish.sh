@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 # 通用一键发布：预检 → 附件校验 → 提交 → 推送(快进) → tag(只建不改) → Release → 上传 → 校验
 # 用法: publish.sh --dir DIR --version V [--repo owner/name] [--assets "a.zip b.zip"]
-#        [--display-name 名称] [--notes-file CHANGELOG.md] [--confirmed|--dry-run]
+#        [--display-name 名称] [--notes-file CHANGELOG.md] [--notes-reviewed] [--confirmed|--dry-run]
 #        [--create-repo --public] [--allow-overwrite] [--resume]
 # 配置: 项目下 .publish.json 只作为「默认值」，命令行优先级更高。
 set -uo pipefail
 API="https://api.github.com"
 UPLOADS="https://uploads.github.com"
 TOKEN_FILE="${GITHUB_TOKEN_FILE:-$HOME/.config/dsh-go/github-token}"
-DRY=0; CONFIRMED=0; CREATE=0; PUBLIC=0; ALLOW_OVERWRITE=0; RESUME=0; DRAFT=0; PRERELEASE=0; GEN_NOTES=0; OVERWRITE_FILES=0; JSON_OUT=0
+DRY=0; CONFIRMED=0; NOTES_REVIEWED=0; CREATE=0; PUBLIC=0; ALLOW_OVERWRITE=0; RESUME=0; DRAFT=0; PRERELEASE=0; GEN_NOTES=0; OVERWRITE_FILES=0; JSON_OUT=0
 DIR=""; REPO=""; V=""; DISPLAY=""; ASSETS=""; NOTES_FILE=""; NOTES=""; TAGPREFIX="v"
 while [ $# -gt 0 ]; do
   case "$1" in
@@ -21,6 +21,7 @@ while [ $# -gt 0 ]; do
     --notes) NOTES="$2"; shift 2;;
     --tag-prefix) TAGPREFIX="$2"; shift 2;;
     --dry-run) DRY=1; shift;;
+    --notes-reviewed) NOTES_REVIEWED=1; shift;;
     --confirmed) CONFIRMED=1; shift;;
     --create-repo) CREATE=1; shift;;
     --public) PUBLIC=1; shift;;
@@ -68,6 +69,7 @@ echo "$V" | grep -Eq '^[0-9A-Za-z][0-9A-Za-z._-]*$' || fail "版本号非法: $V
 echo "$TAGPREFIX" | grep -Eq '^[A-Za-z0-9._-]*$' || fail "tag 前缀非法"
 TAG="$TAGPREFIX$V"
 [ "$DRY" = "1" ] || [ "$CONFIRMED" = "1" ] || fail "拒绝发布：先把「版本号 + 本版更新内容」给用户确认，再加 --confirmed"
+[ "$DRY" = "1" ] || [ "$NOTES_REVIEWED" = "1" ] || fail "拒绝发布：发布公告必须先给用户审核原文，审核通过后加 --notes-reviewed 再发布（禁止未经审核直接发）"
 [ -f "$TOKEN_FILE" ] || fail "没有令牌（先点「存令牌」）"
 PERM=$(stat -c '%a' "$TOKEN_FILE" 2>/dev/null || echo '')
 [ "$PERM" = "600" ] || fail "令牌文件权限不是 600（现在 $PERM），先修权限"
@@ -215,6 +217,10 @@ NEW_SHA=$(grep '^REMOTE_COMMIT' "$LOG" | tail -1 | awk '{print $2}')
 git update-ref "refs/heads/$BRANCH" "$NEW_SHA" 2>/dev/null || true
 git tag -f "$TAG" "$NEW_SHA" >/dev/null 2>&1 || true
 
+# 未指定 notes 时默认读项目 CHANGELOG.md（否则 Release 正文会只剩「见仓库 CHANGELOG」）
+if [ -z "$NOTES" ] && [ -z "$NOTES_FILE" ] && [ -f "CHANGELOG.md" ]; then
+  NOTES_FILE="CHANGELOG.md"
+fi
 step "Release"
 NOTES_TEXT="$NOTES"
 if [ -z "$NOTES_TEXT" ] && [ -n "$NOTES_FILE" ] && [ -f "$NOTES_FILE" ]; then
